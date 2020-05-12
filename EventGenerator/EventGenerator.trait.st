@@ -11,33 +11,25 @@ Trait {
 	#category : #EventGenerator
 }
 
-{ #category : #initialization }
+{ #category : #eventGenerator }
 EventGenerator >> declareGeneratedEvent: anEventName [
 	"anEventName: Symbol"
 	self eventNameToSubscriptionsDictionary at: anEventName put: WeakIdentityKeyDictionary new
 ]
 
-{ #category : #initialization }
-EventGenerator >> declareGeneratedEvents [
-	"Declare all the names of the events this object can publish, with: self declareGeneratedEvent: anEventName"
-	self subclassResponsibility
-]
-
-{ #category : #accessing }
+{ #category : #eventGenerator }
 EventGenerator >> eventNameToSubscriptionsDictionary [
 	eventNameToSubscriptionsDictionary ifNil: [ eventNameToSubscriptionsDictionary := Dictionary new].
 	^ eventNameToSubscriptionsDictionary
 ]
 
 { #category : #initialization }
-EventGenerator >> initialize [
-	self inform: 'intialize trait'.
-	super initialize.
-	eventNameToSubscriptionsDictionary := Dictionary new.
-	self declareGeneratedEvents.
+EventGenerator >> initializeDeclareGeneratedEvents [
+	"Declare all the names of the events this object can publish, with: self declareGeneratedEvent: anEventName. This method must be called in the #initialize method of the class this trait is used in"
+	self subclassResponsibility
 ]
 
-{ #category : #initialization }
+{ #category : #eventGenerator }
 EventGenerator >> publish: anObject asEventNamed: anEventName [
 	" Look for all the objects that subscribed to @anEventName. Call the selector they declared in their subscription with @anObject as argument
 	- anObject: Object. The event to be published
@@ -52,7 +44,7 @@ EventGenerator >> publish: anObject asEventNamed: anEventName [
 	].
 ]
 
-{ #category : #initialization }
+{ #category : #eventGenerator }
 EventGenerator >> subscribe: anObject toCall: aSelector onEvent: anEventName [
 	"When an event named @anEventName will be published by the receiver, the method named @aSelector of @anObject will be called, with the event object as argument (so the @aSelector method needs to accept exactly one argument )
 	- anObject: Object. The object to subscribe to the event

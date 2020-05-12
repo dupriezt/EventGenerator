@@ -9,17 +9,17 @@ Class {
 	#category : #'EventGenerator-Tests'
 }
 
-{ #category : #initialization }
-EventGeneratorForTests >> declareGeneratedEvents [
-	"Declare all the names of the events this object can publish, with: self declareGeneratedEvent: anEventName"
-	self declareGeneratedEvent: #TestEvent
-]
-
-{ #category : #initialization }
+{ #category : #'as yet unclassified' }
 EventGeneratorForTests >> initialize [
 	super initialize.
 	instVar := 2.
-	self declareGeneratedEvents.
+	self initializeDeclareGeneratedEvents.
+]
+
+{ #category : #initialization }
+EventGeneratorForTests >> initializeDeclareGeneratedEvents [
+	"Declare all the names of the events this object can publish, with: self declareGeneratedEvent: anEventName"
+	self declareGeneratedEvent: #TestEvent
 ]
 
 { #category : #initialization }
