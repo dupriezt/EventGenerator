@@ -11,7 +11,7 @@ Metacello new
 
 ## Requirements
 The class using this trait needs to:
-- define the #initializeDeclareGeneratedEvents method to declare the names of all the events it can generate
+- define the #initializeDeclareGeneratedEvents method to declare the names of all the events objects of this class can generate. To declare an event: `self declareGeneratedEvent: anEventName`, where `anEventName` is a symbol.
 - call the  `self initializeDeclareGeneratedEvents` in its own #intialization method
 
 ## Subscribing
